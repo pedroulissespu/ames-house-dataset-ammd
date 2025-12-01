@@ -6,7 +6,7 @@
 
 **Disciplina:** Aprendizado de Máquina e Mineração de Dados
 **Equipe:** Pedro Ulisses Pereira Castro Maia e Caio Henrique De Sousa Guerreiro
-**Data:** 30 Novembro de 2024 (Atualizar conforme for fazendo modificações)
+**Data:** 30 Novembro de 2025 (Atualizar conforme for fazendo modificações)
 
 ---
 
@@ -638,4 +638,4 @@ Ver arquivo `models/training_results.json` para métricas completas de todos os 
 
 **Fim do Relatório Técnico**
 
-*Documento gerado em Novembro de 2024*
+*Documento gerado em Novembro de 2025*
