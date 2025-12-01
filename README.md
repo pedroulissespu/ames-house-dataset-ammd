@@ -3,26 +3,12 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.2-orange)](https://scikit-learn.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.108.0-green)](https://fastapi.tiangolo.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Projeto completo de Machine Learning para predição de preços de imóveis usando o dataset Ames Housing, incluindo análise exploratória, feature engineering, treinamento de múltiplos modelos e API de produção.**
 
 ---
 
-## Sumário
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Estrutura do Repositório](#-estrutura-do-repositório)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Instalação](#-instalação)
-- [Uso](#-uso)
-- [Pipeline de Machine Learning](#-pipeline-de-machine-learning)
-- [Modelos e Resultados](#-modelos-e-resultados)
-- [API Documentation](#-api-documentation)
-- [Arquivos Exportados](#-arquivos-exportados)
-- [Contribuindo](#-contribuindo)
-- [Autor](#-autor)
-- [Licença](#-licença)
+## To do : ajeitar o Sumário depois
 
 ---
 
