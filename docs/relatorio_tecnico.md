@@ -4,47 +4,54 @@
 
 ---
 
-**Disciplina:** Aprendizado de Máquina e Mineração de Dados
-**Equipe:** Pedro Ulisses Pereira Castro Maia e Caio Henrique De Sousa Guerreiro
-**Data:** 30 Novembro de 2025 (Atualizar conforme for fazendo modificações)
+**Disciplina:** Aprendizado de Máquina e Mineração de Dados  
+**Equipe:** Pedro Ulisses Pereira Castro Maia e Caio Henrique De Sousa Guerreiro  
+**Data:** 9 de dezembro de 2025
 
 ---
 
-## Sumário
+## Resumo Executivo
 
-Este relatório apresenta um projeto completo de Machine Learning para predição de preços de imóveis utilizando o dataset Ames Housing. O projeto abrange todas as etapas do pipeline de ML, desde a análise exploratória até o deployment de uma API de produção. O melhor modelo alcançou um R² de 0.895, com RMSE de $23,450, demonstrando alta capacidade preditiva.
+Neste projeto, desenvolvemos um sistema completo de Machine Learning para prever preços de imóveis usando o dataset Ames Housing. O trabalho envolveu todas as etapas típicas de um projeto de ciência de dados: desde a exploração inicial dos dados até a disponibilização de uma API pronta para uso em produção.
+
+Após testar 8 algoritmos diferentes, o modelo Gradient Boosting apresentou os melhores resultados, conseguindo explicar 92.35% da variação nos preços dos imóveis (R² = 0.9235), com um erro médio de $16,862. Esses resultados mostram que o modelo é bastante confiável para fazer predições de preços.
 
 ---
 
 ## 1. Introdução
 
-### 1.1 Contexto e Motivação
+### 1.1 Por que prever preços de imóveis?
 
-O mercado imobiliário é caracterizado por grande variabilidade de preços, influenciada por múltiplos fatores como localização, características físicas, qualidade da construção e condições de mercado. A capacidade de prever preços de imóveis com precisão é valiosa para:
+O mercado imobiliário é complexo e cheio de variáveis. O preço de uma casa depende de inúmeros fatores: tamanho, localização, qualidade da construção, condições do mercado, entre outros. Ter uma ferramenta que consiga estimar preços de forma precisa pode ajudar várias pessoas:
 
-- **Compradores:** Avaliar se um imóvel está com preço justo
-- **Vendedores:** Determinar o preço ideal de venda
-- **Agentes imobiliários:** Auxiliar na negociação e avaliação
-- **Instituições financeiras:** Avaliar garantias para financiamento
+- **Compradores:** Saber se o preço pedido está justo ou muito alto
+- **Vendedores:** Definir um preço competitivo sem deixar dinheiro na mesa
+- **Corretores:** Ter uma base sólida para negociações e avaliações
+- **Bancos:** Avaliar melhor as garantias em financiamentos imobiliários
 
-### 1.2 Objetivo do Projeto
+Foi pensando nisso que decidimos criar este sistema de predição.
 
-Desenvolver um sistema completo de predição de preços de imóveis que:
+### 1.2 O que fizemos neste projeto
 
-1. Analise e compreenda os dados disponíveis
-2. Crie features relevantes através de engenharia de características
-3. Treine e compare múltiplos modelos de Machine Learning
-4. Exporte modelos em formatos reutilizáveis
-5. Disponibilize uma API para predições em produção
+Nosso objetivo foi criar um sistema completo e funcional de predição de preços. Isso envolveu:
 
-### 1.3 Dataset Utilizado
+1. Explorar e entender os dados disponíveis sobre as casas
+2. Criar novas variáveis (features) que pudessem melhorar as predições
+3. Treinar e comparar diferentes algoritmos de Machine Learning
+4. Exportar os modelos em formatos que possam ser reutilizados
+5. Criar uma API que permita fazer predições em tempo real
 
-**Ames Housing Dataset**
-- **Fonte:** Dean De Cock, 2011
-- **Instâncias:** 2.930 observações
-- **Features:** 82 variáveis (43 categóricas, 39 numéricas)
-- **Target:** SalePrice (preço de venda em dólares)
-- **Período:** 2006-2010 (vendas em Ames, Iowa, EUA)
+### 1.3 Sobre os dados utilizados
+
+Usamos o **Ames Housing Dataset**, um conjunto de dados bastante conhecido na comunidade de data science:
+
+- **Origem:** Compilado por Dean De Cock em 2011
+- **Tamanho:** 2.930 casas vendidas em Ames, Iowa (EUA)
+- **Variáveis:** 82 informações sobre cada casa (43 categóricas, 39 numéricas)
+- **Objetivo:** Prever o SalePrice (preço de venda em dólares)
+- **Período:** Vendas entre 2006 e 2010
+
+Este dataset é especialmente interessante porque contém informações muito detalhadas sobre cada imóvel, desde dimensões até qualidade dos acabamentos.
 
 ---
 
@@ -71,25 +78,27 @@ Treinamento → Validação → Otimização → Exportação → API
 - FastAPI: API REST
 - ONNX: Exportação de modelos
 
-### 2.3 Métricas de Avaliação
+### 2.3 Como avaliamos os modelos
 
-As seguintes métricas foram utilizadas para avaliar os modelos:
+Para saber qual modelo estava funcionando melhor, usamos algumas métricas padrão:
 
-1. **R² Score (Coeficiente de Determinação)**
-   - Indica a proporção da variância explicada pelo modelo
-   - Valores próximos de 1 indicam melhor ajuste
+1. **R² (Coeficiente de Determinação)**
+   - Mostra quanto da variação nos preços o modelo consegue explicar
+   - Varia de 0 a 1 (quanto mais próximo de 1, melhor)
+   - Exemplo: R² = 0.92 significa que o modelo explica 92% da variação
 
-2. **RMSE (Root Mean Squared Error)**
-   - Penaliza erros grandes de forma quadrática
-   - Mesma unidade do target (dólares)
+2. **RMSE (Erro Quadrático Médio)**
+   - Mede o erro médio das predições em dólares
+   - Penaliza mais os erros grandes
+   - Quanto menor, melhor
 
-3. **MAE (Mean Absolute Error)**
-   - Média do valor absoluto dos erros
-   - Interpretação mais direta que RMSE
+3. **MAE (Erro Absoluto Médio)**
+   - Também mede o erro médio, mas de forma mais direta
+   - Mais fácil de interpretar: "em média, erramos X dólares"
 
-4. **MAPE (Mean Absolute Percentage Error)**
-   - Erro percentual médio
-   - Útil para comparação entre datasets
+4. **MAPE (Erro Percentual Absoluto Médio)**
+   - Mostra o erro em termos percentuais
+   - Útil para comparar com outros projetos
 
 ---
 
@@ -369,7 +378,7 @@ Upper Bound = Q3 + 1.5 × IQR
 **Teste de consistência ONNX:**
 - Diferença máxima: 0.000012
 - Diferença média: 0.000003
-- Status: ✓ Exportação verificada com sucesso
+- Status: Exportação verificada com sucesso
 
 ### 8.3 Artefatos Exportados
 
@@ -564,40 +573,59 @@ jupyter notebook notebooks/01_eda.ipynb
 
 ---
 
-## 12. Conclusões
+## 12. Conclusões e Reflexões
 
-Este projeto demonstrou a aplicação completa do pipeline de Machine Learning para um problema real de regressão. Os principais resultados foram:
+### O que conseguimos alcançar
 
-1. **Modelo robusto:** XGBoost alcançou R² de 0.895, explicando 89.5% da variância nos preços
-2. **Erro aceitável:** RMSE de $23,450 representa ~13% do preço médio
-3. **Deployment funcional:** API REST pronta para produção
-4. **Código reprodutível:** Documentação e organização permitem fácil reprodução
+Ao final deste projeto, conseguimos construir um sistema completo e funcional de predição de preços de imóveis. Os resultados foram bastante positivos:
 
-O projeto cumpriu todos os objetivos propostos:
-- ✅ Análise exploratória completa
-- ✅ Feature engineering sistemático
-- ✅ Comparação de múltiplos modelos
-- ✅ Otimização de hiperparâmetros
-- ✅ Exportação em formatos padrão
-- ✅ API de produção funcional
-- ✅ Documentação abrangente
+**Performance do modelo:**
+- O modelo Gradient Boosting conseguiu um R² de 0.9235, ou seja, explica 92.35% da variação nos preços
+- O erro médio (RMSE) ficou em $16,862, que representa cerca de 9% do preço médio das casas
+- A validação cruzada mostrou resultados consistentes, indicando que o modelo generaliza bem
 
-### Aprendizados
+**Entregas do projeto:**
+- Análise exploratória detalhada dos dados
+- Criação de novas variáveis que melhoraram as predições
+- Comparação justa entre 8 algoritmos diferentes
+- Modelos exportados em formatos reutilizáveis (.pkl e .onnx)
+- API REST funcionando e documentada
+- Código organizado e reprodutível
 
-1. **Feature engineering é crucial:** Features criadas melhoraram significativamente a performance
-2. **Ensemble methods funcionam:** XGBoost e LightGBM superaram modelos lineares
-3. **Validação adequada é essencial:** Cross-validation evitou overfitting
-4. **Deployment importa:** Modelo sem API tem valor limitado
+### O que aprendemos
 
-### Próximos Passos
+**Insights técnicos:**
 
-Para levar este projeto adiante:
+1. **Feature engineering faz diferença:** As variáveis que criamos (como idade da casa, área total, etc.) foram fundamentais para melhorar a performance dos modelos.
 
-1. Coletar dados mais recentes e de outras localidades
-2. Implementar monitoramento de drift em produção
-3. Adicionar features externas (econômicas, geográficas)
-4. Desenvolver interface web para usuários finais
-5. Publicar como serviço em cloud (AWS, Azure, GCP)
+2. **Modelos ensemble são poderosos:** XGBoost, LightGBM e Gradient Boosting superaram os modelos lineares com boa margem, mostrando que conseguem capturar relações complexas nos dados.
+
+3. **Validação é essencial:** Usar cross-validation nos ajudou a evitar overfitting e ter mais confiança nos resultados.
+
+4. **Deployment é parte do trabalho:** Um modelo que só existe em um notebook Jupyter tem utilidade limitada. Criar a API foi fundamental para tornar o projeto utilizável.
+
+**Insights sobre os dados:**
+
+- A qualidade geral da casa (Overall Qual) é o fator mais importante para o preço
+- Área de estar tem grande impacto, mas não é linear (casas muito grandes têm retorno decrescente)
+- Features relacionadas a garagem são surpreendentemente importantes
+- Casas muito antigas ou muito novas requerem atenção especial nas predições
+
+### Possíveis melhorias futuras
+
+Se fôssemos continuar desenvolvendo este projeto, poderíamos:
+
+1. **Expandir os dados:** Incluir informações de outras cidades e períodos mais recentes
+2. **Adicionar monitoramento:** Implementar alertas quando o modelo começar a degradar (concept drift)
+3. **Enriquecer com dados externos:** Incluir informações econômicas, criminalidade, escolas próximas, etc.
+4. **Criar interface amigável:** Desenvolver um site simples onde usuários possam fazer predições
+5. **Publicar na nuvem:** Hospedar a API em AWS, Azure ou Google Cloud para acesso público
+
+### Considerações finais
+
+Este projeto foi uma experiência completa de ciência de dados, cobrindo desde a análise inicial até a disponibilização de um produto utilizável. Aprendemos que um bom projeto de ML vai muito além de treinar um modelo - envolve entender o problema, preparar bem os dados, validar adequadamente e pensar em como o modelo será usado na prática.
+
+Os resultados mostram que é possível criar sistemas de predição confiáveis para o mercado imobiliário, mas também deixam claro que sempre há espaço para melhorias e que o trabalho não termina quando o modelo é treinado.
 
 ---
 
@@ -611,26 +639,26 @@ Para levar este projeto adiante:
 
 4. Ke, G., et al. (2017). LightGBM: A Highly Efficient Gradient Boosting Decision Tree. NIPS '17.
 
-5. Scikit-learn Documentation. https://scikit-learn.org/
+5. Documentação Scikit-learn: https://scikit-learn.org/
 
-6. FastAPI Documentation. https://fastapi.tiangolo.com/
+6. Documentação FastAPI: https://fastapi.tiangolo.com/
 
-7. ONNX Documentation. https://onnx.ai/
+7. Documentação ONNX: https://onnx.ai/
 
 ---
 
 ## Apêndices
 
-### Apêndice A: Estrutura do Dataset
+### Apêndice A: Sobre o Dataset
 
-Ver arquivo `AmesHousing.csv` para dataset completo.
+O dataset completo está disponível no arquivo `AmesHousing.csv` na raiz do projeto.
 
 ### Apêndice B: Código-Fonte
 
-Todo o código está disponível no repositório GitHub:
-https://github.com/seu-usuario/ames-house-dataset-ammd
+Todo o código desenvolvido está disponível no repositório GitHub:
+https://github.com/pedroulissespu/ames-house-dataset-ammd
 
-### Apêndice C: Métricas Detalhadas
+### Apêndice C: Resultados Detalhados
 
 Ver arquivo `models/training_results.json` para métricas completas de todos os modelos.
 

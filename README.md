@@ -315,7 +315,6 @@ Este projeto possui documentação abrangente organizada por módulos:
 
 - **[QUICKSTART.md](QUICKSTART.md)** - Guia passo a passo para executar o projeto do zero
 - **[docs/relatorio_tecnico.md](docs/relatorio_tecnico.md)** - Relatório técnico completo do projeto
-- **[docs/API_TEST_REPORT.md](docs/API_TEST_REPORT.md)** - Relatório detalhado dos testes da API
 
 ### Documentação por Módulo
 
