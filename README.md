@@ -1,14 +1,31 @@
 # Ames Housing Price Prediction
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.2-orange)](https://scikit-learn.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.108.0-green)](https://fastapi.tiangolo.com/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4.0-orange)](https://scikit-learn.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-green)](https://fastapi.tiangolo.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Projeto completo de Machine Learning para predição de preços de imóveis usando o dataset Ames Housing, incluindo análise exploratória, feature engineering, treinamento de múltiplos modelos e API de produção.**
+> **Sistema completo de Machine Learning para predição de preços de imóveis com o dataset Ames Housing: desde análise exploratória até API de produção pronta para deploy.**
 
 ---
 
-## To do : ajeitar o Sumário depois
+## Quickstart
+
+Veja o [**QUICKSTART.md**](QUICKSTART.md) com todos os passos detalhados de como usar.
+
+---
+
+## Índice
+
+- [Descrição](#descrição)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Tecnologias](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+- [Resultados](#resultados-dos-modelos)
+- [API](#documentação-da-api)
+- [Documentação Adicional](#documentação-adicional)
+- [Equipe](#equipe)
 
 ---
 
@@ -32,66 +49,71 @@ Prever o preço de venda de imóveis residenciais com base em diversas caracter�
 
 ---
 
-## Estrutura do Repositório
+## Estrutura do Projeto
 
-```
+```text
 ames-house-dataset-ammd/
 │
-├── AmesHousing.csv              # Dataset original
-├── README.md                    # Este arquivo
+├── AmesHousing.csv              # Dataset original (2,930 casas)
+├── README.md                    # Documentação principal (este arquivo)
+├── QUICKSTART.md                # Guia rápido de execução
 ├── requirements.txt             # Dependências Python
-├── train.py                     # Script principal de treinamento
+├── train.py                     # Script de treinamento
 │
-├── src/                         # Código-fonte
-│   ├── __init__.py
-│   ├── config.py                # Configurações do projeto
-│   ├── data_preprocessing.py    # Pré-processamento de dados
+├── src/                         # Código-fonte → [Ver README](src/README.md)
+│   ├── config.py                # Configurações centralizadas
+│   ├── data_preprocessing.py    # Pipeline de limpeza
 │   ├── feature_engineering.py   # Criação de features
 │   ├── model_training.py        # Treinamento de modelos
-│   └── model_export.py          # Exportação de modelos
+│   └── model_export.py          # Exportação (.pkl, .onnx)
 │
-├── notebooks/                   # Notebooks Jupyter
-│   └── 01_eda.ipynb            # Análise Exploratória de Dados
+├── notebooks/                   # Análise exploratória → [Ver README](notebooks/README.md)
+│   └── 01_eda.ipynb            # Visualizações e insights
 │
-├── api/                         # API FastAPI
-│   └── main.py                 # Aplicação FastAPI
+├── api/                         # API FastAPI → [Ver README](api/README.md)
+│   └── main.py                 # 6 endpoints REST
 │
-├── models/                      # Modelos treinados (gerados)
-│   ├── best_model.pkl          # Melhor modelo em pickle
-│   ├── best_model.onnx         # Modelo em ONNX
-│   ├── preprocessor.pkl        # Pipeline de pré-processamento
+├── models/                      # Modelos treinados → [Ver README](models/README.md)
+│   ├── best_model.pkl          # Gradient Boosting (pickle)
+│   ├── best_model.onnx         # Modelo ONNX (otimizado)
+│   ├── preprocessor.pkl        # Pipeline de transformação
 │   ├── feature_names.pkl       # Nomes das features
-│   └── training_results.json   # Resultados do treinamento
+│   └── training_results.json   # Métricas de todos os modelos
 │
-├── data/                        # Dados processados (gerados)
-│   └── processed_data.csv      # Dados após pré-processamento
+├── docs/                        # Documentação → [Ver README](docs/README.md)
+│   └── relatorio_tecnico.md    # Relatório completo do projeto
 │
-├── docs/                        # Documentação adicional
-│   └── relatorio_tecnico.pdf   # Relatório técnico (a ser gerado)
-│
-└── tests/                       # Testes automatizados
-    └── test_api.py             # Testes da API
+└── tests/                       # Suite de testes → [Ver README](tests/README.md)
+    ├── test_api_health.py      # Testes básicos da API
+    ├── test_api_predictions.py # Testes de predição
+    ├── test_api_comprehensive.py  # Suite completa (9 testes)
+    └── test_model_performance.py  # Testes do modelo
 ```
+
+**Cada diretório tem seu próprio README com instruções detalhadas!**
 
 ---
 
 ## Tecnologias Utilizadas
 
 ### Core ML Stack
+
 - **Python 3.8+**
 - **pandas** - Manipulação de dados
 - **numpy** - Computação numérica
-- **scikit-learn** - Machine Learning
-- **XGBoost** - Gradient Boosting otimizado
-- **LightGBM** - Gradient Boosting eficiente
+- **scikit-learn 1.4.0** - Machine Learning
+- **XGBoost 2.0.0** - Gradient Boosting otimizado
+- **LightGBM 4.1.0** - Gradient Boosting eficiente
 
 ### Model Serving
-- **FastAPI** - Framework web moderno
+
+- **FastAPI 0.110.0** - Framework web moderno
 - **uvicorn** - Servidor ASGI
-- **ONNX** - Formato de modelo interoperável
+- **ONNX 1.16.0** - Formato de modelo interoperável
 - **onnxruntime** - Runtime para ONNX
 
 ### Data Analysis & Visualization
+
 - **matplotlib** - Visualizações estáticas
 - **seaborn** - Visualizações estatísticas
 - **plotly** - Visualizações interativas
@@ -99,119 +121,10 @@ ames-house-dataset-ammd/
 
 ---
 
-## Setup do ambiente
-
-### Pré-requisitos
-
-- Python 3.8 ou superior
-- pip (gerenciador de pacotes Python)
-- Git
-
-### Passo a Passo
-
-1. **Clone o repositório**
-
-```bash
-git clone https://github.com/seu-usuario/ames-house-dataset-ammd.git
-cd ames-house-dataset-ammd
-```
-
-2. **Crie um ambiente virtual (recomendado)**
-
-```bash
-# Linux/Mac
-python3 -m venv venv
-source venv/bin/activate
-
-# Windows
-python -m venv venv
-venv\Scripts\activate
-```
-
-3. **Instale as dependências**
-
-```bash
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
----
-
-## Como utilizar
-
-### 1. Análise Exploratória de Dados
-
-Execute o notebook de EDA:
-
-```bash
-jupyter notebook notebooks/01_eda.ipynb
-```
-
-### 2. Treinamento dos Modelos
-
-Execute o script principal de treinamento:
-
-```bash
-python train.py
-```
-
-**Saída esperada:**
-- Modelos treinados e exportados em `models/`
-- Métricas de avaliação no console
-- Arquivo JSON com resultados em `models/training_results.json`
-
-**Tempo estimado:** 5-15 minutos (dependendo do hardware)
-
-### 3. Executar a API
-
-#### Opção 1: Modo desenvolvimento
-
-```bash
-cd api
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-#### Opção 2: Modo produção
-
-```bash
-cd api
-uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
-```
-
-**Acesse:**
-- Documentação interativa: http://localhost:8000/docs
-- Documentação alternativa: http://localhost:8000/redoc
-- Health check: http://localhost:8000/health
-
-### 4. Testar a API
-
-#### Usando curl
-
-```bash
-curl -X POST "http://localhost:8000/predict/pkl" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Gr_Liv_Area": 1500,
-    "Overall_Qual": 7,
-    "Overall_Cond": 5,
-    "Year_Built": 2000,
-    "Year_Remod_Add": 2000,
-    "Total_Bsmt_SF": 1000,
-    "Full_Bath": 2,
-    "Half_Bath": 1,
-    "Bedroom_AbvGr": 3,
-    "Kitchen_AbvGr": 1,
-    "TotRms_AbvGrd": 7,
-    "Fireplaces": 1,
-    "Garage_Cars": 2,
-    "Garage_Area": 500
-  }'
-```
----
-
-## Pipeline
+## Pipeline de Desenvolvimento
 
 ### Etapa 1: Pré-processamento
+
 1. **Carregamento dos dados** do CSV
 2. **Feature Engineering:**
    - Idade da casa
@@ -225,6 +138,7 @@ curl -X POST "http://localhost:8000/predict/pkl" \
 4. **Separação features/target**
 
 ### Etapa 2: Transformação
+
 - **Features numéricas:**
   - Imputação (mediana)
   - Padronização (StandardScaler)
@@ -234,7 +148,9 @@ curl -X POST "http://localhost:8000/predict/pkl" \
   - One-Hot Encoding
 
 ### Etapa 3: Treinamento
+
 8 modelos testados:
+
 1. Linear Regression (baseline)
 2. Ridge Regression
 3. Lasso Regression
@@ -245,6 +161,7 @@ curl -X POST "http://localhost:8000/predict/pkl" \
 8. LightGBM
 
 ### Etapa 4: Avaliação
+
 - **Métricas:**
   - R² Score (coeficiente de determinação)
   - RMSE (Root Mean Squared Error)
@@ -256,10 +173,12 @@ curl -X POST "http://localhost:8000/predict/pkl" \
   - 5-Fold Cross-Validation
 
 ### Etapa 5: Otimização
+
 - Grid Search para hiperparâmetros
 - Seleção do melhor modelo
 
 ### Etapa 6: Exportação
+
 - Formato Pickle (.pkl)
 - Formato ONNX (.onnx)
 - Preprocessador
@@ -267,27 +186,31 @@ curl -X POST "http://localhost:8000/predict/pkl" \
 
 ---
 
-## Modelos e Resultados
+## Resultados dos Modelos
 
-### Comparação de Modelos
+### Comparação de Performance
 
 | Modelo | R² (Test) | RMSE (Test) | MAE (Test) | CV R² (Mean) |
 |--------|-----------|-------------|------------|--------------|
-| XGBoost | 0.8950 | $23,450 | $15,230 | 0.8920 ± 0.015 |
-| LightGBM | 0.8930 | $23,680 | $15,450 | 0.8905 ± 0.017 |
-| Random Forest | 0.8850 | $24,520 | $16,120 | 0.8810 ± 0.020 |
-| Gradient Boosting | 0.8820 | $24,850 | $16,350 | 0.8795 ± 0.018 |
-| ElasticNet | 0.8520 | $27,830 | $18,920 | 0.8490 ± 0.025 |
-| Ridge | 0.8510 | $27,950 | $19,050 | 0.8485 ± 0.024 |
-| Lasso | 0.8500 | $28,020 | $19,100 | 0.8480 ± 0.025 |
-| Linear Regression | 0.8490 | $28,120 | $19,200 | 0.8470 ± 0.026 |
+| Gradient Boosting | 0.9235 | $16,862 | $12,021 | 0.8982 ± 0.018 |
+| XGBoost | 0.9212 | $17,123 | $12,093 | 0.8963 ± 0.019 |
+| LightGBM | 0.9189 | $17,367 | $12,254 | 0.8958 ± 0.022 |
+| Random Forest | 0.9032 | $18,970 | $13,325 | 0.8809 ± 0.020 |
+| Ridge | 0.8630 | $22,572 | $13,474 | 0.8214 ± 0.139 |
+| Lasso | 0.8402 | $24,379 | $13,141 | 0.8037 ± 0.148 |
+| Linear Regression | 0.8282 | $25,278 | $13,450 | 0.7749 ± 0.156 |
+| ElasticNet | 0.8258 | $25,450 | $15,558 | 0.8299 ± 0.086 |
 
-**Modelo Selecionado:** XGBoost
-- Melhor performance geral
-- Bom equilíbrio entre R² e erro
+**Modelo Selecionado:** Gradient Boosting
+
+- Melhor R² no conjunto de teste (0.9235)
+- Menor erro (RMSE e MAE)
 - Cross-validation consistente
+- Bom equilíbrio entre performance e generalização
 
 ### Features Mais Importantes
+
+As características que mais influenciam no preço dos imóveis:
 
 1. Overall Qual (Qualidade geral) - 18.5%
 2. Gr Liv Area (Área de estar) - 15.2%
@@ -381,6 +304,45 @@ Predição em lote (múltiplas casas)
 - Métricas de todos os modelos
 - Hiperparâmetros utilizados
 - Tempos de treinamento
+
+---
+
+## Documentação Adicional
+
+Este projeto possui documentação abrangente organizada por módulos:
+
+### Guias Principais
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Guia passo a passo para executar o projeto do zero
+- **[docs/relatorio_tecnico.md](docs/relatorio_tecnico.md)** - Relatório técnico completo do projeto
+- **[docs/API_TEST_REPORT.md](docs/API_TEST_REPORT.md)** - Relatório detalhado dos testes da API
+
+### Documentação por Módulo
+
+- **[api/README.md](api/README.md)** - Documentação completa da API FastAPI
+  - Todos os endpoints disponíveis
+  - Exemplos de uso com curl e Python
+  - Schemas de request/response
+  
+- **[src/README.md](src/README.md)** - Módulos de código-fonte
+  - Fluxo de execução do pipeline
+  - Documentação de cada módulo
+  - Configurações disponíveis
+  
+- **[tests/README.md](tests/README.md)** - Suite de testes
+  - Como executar os testes
+  - Interpretação dos resultados
+  - Adicionar novos testes
+  
+- **[models/README.md](models/README.md)** - Artefatos dos modelos
+  - Descrição de cada arquivo gerado
+  - Como carregar e usar os modelos
+  - Formatos disponíveis (.pkl, .onnx)
+  
+- **[notebooks/README.md](notebooks/README.md)** - Análise exploratória
+  - Guia do notebook EDA
+  - Visualizações disponíveis
+  - Como reproduzir a análise
 
 ---
 
