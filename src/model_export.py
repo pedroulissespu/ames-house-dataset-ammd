@@ -12,8 +12,8 @@ try:
     ONNX_AVAILABLE = True
 except (ImportError, AttributeError, Exception) as e:
     ONNX_AVAILABLE = False
-    print(f"⚠️  ONNX não disponível: {type(e).__name__}")
-    print("   Exportação ONNX será desabilitada (não afeta o treinamento)")
+    print(f"AVISO: ONNX não disponível: {type(e).__name__}")
+    print("Exportação ONNX será desabilitada (não afeta o treinamento)")
 
 from src.config import MODEL_PKL_PATH, MODEL_ONNX_PATH
 
@@ -45,7 +45,7 @@ class ModelExporter:
             filepath: Caminho para salvar o arquivo
         """
         if not ONNX_AVAILABLE:
-            print("❌ ONNX não está disponível. Pulando exportação ONNX.")
+            print("ERRO: ONNX não está disponível. Pulando exportação ONNX.")
             return None
             
         if filepath is None:
@@ -67,14 +67,14 @@ class ModelExporter:
             with open(filepath, "wb") as f:
                 f.write(onnx_model.SerializeToString())
             
-            print(f"✓ Modelo exportado para ONNX: {filepath}")
-            print(f"  Número de features: {n_features}")
+            print(f"Modelo exportado para ONNX: {filepath}")
+            print(f"Número de features: {n_features}")
             
             return filepath
             
         except Exception as e:
-            print(f"❌ Erro ao exportar para ONNX: {e}")
-            print("   Alguns modelos podem não ser compatíveis com ONNX.")
+            print(f"ERRO: Falha ao exportar para ONNX: {e}")
+            print("Alguns modelos podem não ser compatíveis com ONNX.")
             return None
     
     @staticmethod
@@ -83,14 +83,14 @@ class ModelExporter:
         Carrega modelo ONNX
         """
         if not ONNX_AVAILABLE:
-            print("❌ ONNX não está disponível.")
+            print("ERRO: ONNX não está disponível.")
             return None
             
         if filepath is None:
             filepath = MODEL_ONNX_PATH
         
         sess = rt.InferenceSession(filepath)
-        print(f"✓ Modelo ONNX carregado: {filepath}")
+        print(f"Modelo ONNX carregado com sucesso: {filepath}")
         
         return sess
     
