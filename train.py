@@ -1,5 +1,7 @@
 """
 Script principal de treinamento do pipeline completo
+
+TODO: precisa refatorar 
 """
 import sys
 from pathlib import Path
@@ -8,9 +10,11 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import joblib
 import warnings
+import time 
+# import matplotlib.pyplot as plt 
 warnings.filterwarnings('ignore')
 
-# Adicionar src ao path
+# dicionar src ao path
 sys.path.append(str(Path(__file__).parent))
 
 from src.config import (
@@ -37,6 +41,8 @@ def main():
     
     print(f"Shape original: {df.shape}")
     print(f"Valores ausentes:\n{df.isnull().sum().sum()} no total")
+    # print(df.head())  # debug
+    # print(df.info())
     
     # 2. FEATURE ENGINEERING
     print("\n[2/7] Criando novas feats...")
@@ -97,10 +103,6 @@ def main():
     # 6. OTIMIZAÇÃO DE HIPERPARÂMETROS (opcional)
     print("\n[6/7] Otimizando hiperparâmetros do melhor modelo...")
     
-    # trainer.hyperparameter_tuning(X_train_processed, y_train)
-    # Caso não precise da otimização desabilitada, pode descomentar a linha de código acima
-    # Deixei comentada pois eu estou com pressa para testar, podemos revisitar esse campo depois
-    # Vou deixar um to-do
     # TODO : testar com a otimização habilitada
     
     # 7. EXPORTAR MODELOS
