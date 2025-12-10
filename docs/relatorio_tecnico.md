@@ -1,6 +1,5 @@
-# Relatório Técnico
-## Predição de Preços de Imóveis usando ML
-### Dataset Ames Housing
+# Relatório Técnico - Predição de Preços de Imóveis
+## Dataset Ames Housing
 
 ---
 
@@ -12,15 +11,15 @@
 
 ## Resumo Executivo
 
-Neste projeto, desenvolvemos um sistema completo de Machine Learning para prever preços de imóveis usando o dataset Ames Housing. O trabalho envolveu todas as etapas típicas de um projeto de ciência de dados: desde a exploração inicial dos dados até a disponibilização de uma API pronta para uso em produção.
+Nesse projeto a gente desenvolveu um sistema de Machine Learning pra prever preços de imóveis usando o dataset Ames Housing. O trabalho envolveu várias etapas: desde explorar os dados inicialmente até disponibilizar uma API que funciona.
 
-Após testar 8 algoritmos diferentes, o modelo Gradient Boosting apresentou os melhores resultados, conseguindo explicar 92.35% da variação nos preços dos imóveis (R² = 0.9235), com um erro médio de $16,862. Esses resultados mostram que o modelo é bastante confiável para fazer predições de preços.
+Depois de testar 8 algoritmos diferentes, o modelo Gradient Boosting foi o que deu melhores resultados, conseguindo explicar 92.35% da variação nos preços (R² = 0.9235), com erro médio de $16,862. Esses resultados mostram que o modelo é bem confiável pras predições.
 
 ---
 
 ## 1. Introdução
 
-### 1.1 Por que prever preços de imóveis?
+### 1.1 Porque prever preços de imóveis?
 
 O mercado imobiliário é complexo e cheio de variáveis. O preço de uma casa depende de inúmeros fatores: tamanho, localização, qualidade da construção, condições do mercado, entre outros. Ter uma ferramenta que consiga estimar preços de forma precisa pode ajudar várias pessoas:
 
