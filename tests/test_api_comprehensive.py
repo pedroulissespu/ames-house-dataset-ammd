@@ -1,6 +1,5 @@
 """
-Testes abrangentes da API
-Testa todos os endpoints, tratamento de erros, performance
+Testes da API
 """
 import requests
 import pandas as pd
@@ -9,12 +8,16 @@ import math
 import time
 import sys
 from pathlib import Path
+# import pytest
 
 BASE_URL = "http://127.0.0.1:8000"
 
+# pra debugar
+# print(f"Testing API at {BASE_URL}")
+
 def test_api_available():
-    """Verifica se a API está disponível"""
-    print("\n[TEST] Verificando disponibilidade da API...")
+    """Verifica se a API ta rodando"""
+    print("\n[TEST] Checando se API ta online...")
     try:
         response = requests.get(BASE_URL, timeout=5)
         assert response.status_code == 200, f"API retornou status {response.status_code}"
