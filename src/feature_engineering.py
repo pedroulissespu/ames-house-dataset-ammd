@@ -1,12 +1,14 @@
-"""
-Módulo de engenharia de features
-"""
+# Feature Engineering
+
 import pandas as pd
 import numpy as np
+# from scipy import stats 
 
 
 class FeatureEngineer:
-    """Classe para criação de novas features"""
+    """cria features novas baseadas no dataset
+    
+    """
     
     @staticmethod
     def create_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -15,15 +17,15 @@ class FeatureEngineer:
         """
         df = df.copy()
         
-        # 1. Idade da casa
+        # idade da casa - faz sentido, casas mais velhas valem menos geralmente
         if 'Year Built' in df.columns and 'Yr Sold' in df.columns:
             df['House_Age'] = df['Yr Sold'] - df['Year Built']
         
-        # 2. Anos desde remodelação
+        # quanto tempo faz que reformou
         if 'Year Remod/Add' in df.columns and 'Yr Sold' in df.columns:
             df['Years_Since_Remod'] = df['Yr Sold'] - df['Year Remod/Add']
         
-        # 3. Total de banheiros
+        # somar todos os banheiros (pq ta espalhado em varias colunas)
         bathroom_cols = []
         if 'Full Bath' in df.columns:
             bathroom_cols.append('Full Bath')

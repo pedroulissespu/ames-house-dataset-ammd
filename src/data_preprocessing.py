@@ -1,6 +1,5 @@
-"""
-Módulo de pré-processamento de dados
-"""
+# Preprocessamento dos dados
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -9,12 +8,14 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from typing import Tuple
 import joblib
+# import warnings
+# warnings.filterwarnings('ignore')
 
 from src.config import TARGET_COLUMN, PREPROCESSOR_PATH
 
 
 class DataPreprocessor:
-    """Classe para pré-processamento dos dados"""
+    """faz o preprocessamento: limpeza, missing values, etc"""
     
     def __init__(self):
         self.preprocessor = None

@@ -1,17 +1,18 @@
-"""
-Módulo de treinamento de modelos
-"""
+# Módulo de treinamento de modelos
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+# from sklearn.svm import SVR 
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
 import joblib
 from typing import Dict, Tuple
 import json
+import warnings
 
 from src.config import RANDOM_STATE, TEST_SIZE, CV_FOLDS, MODEL_PKL_PATH
 
@@ -27,15 +28,17 @@ class ModelTrainer:
         self.best_model_name = None
         
     def get_models(self) -> Dict:
-        """Retorna dicionário com modelos a serem treinados"""
+        """Retorna dicionário com modelos a serem treinados
+        
+        """
         models = {
-            'Linear Regression': LinearRegression(),
+            'Linear Regression': LinearRegression(),  # baseline simples
             
-            'Ridge': Ridge(random_state=self.random_state),
+            'Ridge': Ridge(random_state=self.random_state),  # funciona ok
             
-            'Lasso': Lasso(random_state=self.random_state),
+            'Lasso': Lasso(random_state=self.random_state),  # feature selection automático
             
-            'ElasticNet': ElasticNet(random_state=self.random_state),
+            'ElasticNet': ElasticNet(random_state=self.random_state),  # meio termo entre ridge e lasso
             
             'Random Forest': RandomForestRegressor(
                 n_estimators=100,
