@@ -5,7 +5,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-green)](https://fastapi.tiangolo.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Sistema completo de Machine Learning para predição de preços de imóveis com o dataset Ames Housing: desde análise exploratória até API de produção pronta para deploy.**
+> Sistema de ML pra prever preço de casas usando o dataset Ames Housing. Tem desde análise dos dados até API funcionando.
 
 ---
 
@@ -35,17 +35,17 @@ O objetivo é criar um sistema completo de predição de preços de imóveis uti
 
 ### Problema de Negócio
 
-Prever o preço de venda de imóveis residenciais com base em diversas características físicas, localização e qualidade da construção, auxiliando compradores, vendedores e agentes imobiliários na tomada de decisões.
+Prever o preço de venda de imóveis residenciais com base em diversas características físicas, localização e qualidade da construção. Pode ajudar compradores, vendedores e corretores na tomada de decisões.
 
-### Solução Desenvolvida
+### O que foi feito
 
-- **Análise Exploratória de Dados (EDA)** completa
-- **Feature Engineering** com criação de 12+ novas features
-- **Treinamento de 8 modelos** diferentes de ML
-- **Otimização de hiperparâmetros** com GridSearchCV
-- **Exportação em múltiplos formatos** (.pkl, .onnx)
-- **API REST** para servir os modelos em produção
-- **Documentação completa** e reprodutível
+- Análise Exploratória de Dados (EDA) completa  
+- Feature Engineering com criação de 12+ novas features
+- Treinamento de 8 modelos diferentes de ML
+- Otimização de hiperparâmetros
+- Exportação em múltiplos formatos (.pkl, .onnx)
+- API REST para servir os modelos
+- Documentação
 
 ---
 
