@@ -73,9 +73,10 @@ async def load_models():
 
 
 class HouseFeatures(BaseModel):
-    """Schema de entrada para predição"""
-    # Principais features
-    # TODO : essas são as features iniciais identificadas até o momento, vamos precisar ir adicionando mais conforme fomos percebendo as outras
+    """Schema de entrada pra API
+    
+    """
+    # features principais (comecei por essas)
     Gr_Liv_Area: int = Field(..., description="Área de estar acima do solo (pés quadrados)")
     Overall_Qual: int = Field(..., ge=1, le=10, description="Qualidade geral do material e acabamento")
     Overall_Cond: int = Field(..., ge=1, le=10, description="Condição geral")
